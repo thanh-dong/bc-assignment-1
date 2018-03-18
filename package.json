@@ -1,19 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "build": "npm run clean && cross-env NODE_ENV=production webpack -p --progress --hide-modules --config=config/webpack.js",
-    "clean": "rimraf build coverage",
-    "start": "cross-env NODE_ENV=development webpack-dev-server -d --progress --config=config/webpack.js",
-    "test": "npm run clean && cross-env NODE_ENV=test jest --coverage --config=config/jest.js",
-    "watch": "cross-env NODE_ENV=development webpack --watch -d --progress --hide-modules --config=config/webpack.js"
+    "start": "cross-env NODE_ENV=development webpack-dev-server -d --progress --config=config/webpack.js"
   },
   "dependencies": {
-    "fs-extra": "^5.0.0",
     "lodash": "^4.17.5",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-select": "^1.2.1",
-    "solc": "^0.4.21",
     "web3": "^0.20.2"
   },
   "devDependencies": {

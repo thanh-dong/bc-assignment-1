@@ -72,4 +72,4 @@ contract VirtLotto {
         uint total;
         mapping (uint => Ticket) ticketList;
     }
-s}
+}

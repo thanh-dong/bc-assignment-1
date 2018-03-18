@@ -42,10 +42,6 @@ const config = {
     historyApiFallback: true,
     overlay: true,
     stats: 'minimal',
-  },
-  node: {
-    fs: 'empty',
-    module: "empty"
   }
 }
 

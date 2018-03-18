@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
@@ -14,22 +13,31 @@ class App extends Component {
   }
 
   render() {
-
     const numberOptions = _.range(1, 10).map(number => ({
       value: number,
       label: number
     }));
 
-    const selectAccount = (account) => this.setState({selectAccount: account})
-    const selectNumber = (e, number) => this.setState({selectNumber: number})
-    const amountChanged = (event, amount) => this.setState({amount})
+    const selectAccount = (account) => this.setState({selectedAccount: account})
+    const selectNumber = (number) => this.setState({selectNumber: number})
+    const amountChanged = (event) => this.setState({amount: event.target.value})
     const bet = () => {
-      getContractInstance().pickNumber(this.state.selectNumber, {
-        from: this.state.selectedAccount,
-        value: initWeb3().toWei(this.state.amount, 'finney'),
-        gas: 1000000
-      });
+      getContractInstance().pickNumber(
+        this.state.selectNumber.value,
+        {
+          from: this.state.selectedAccount.value,
+          value: initWeb3().toWei(this.state.amount, 'finney'),
+          gas: 1000000
+        },
+        (error, result) => {
+          if (error) {
+            console.log(error);
+          }
+        }
+      );
     }
+
+    const accounts = getAccounts()
     return (
       <div className="app">
         <div className="app-header">
@@ -40,13 +48,13 @@ class App extends Component {
             name="account"
             value={this.state.selectedAccount}
             onChange={selectAccount}
-            options={getAccounts()}
+            options={accounts}
           />
         </div>
         <div className="container">
           <Select
             name="number"
-            value={this.state.selectedAccount}
+            value={this.state.selectNumber}
             onChange={selectNumber}
             options={numberOptions}
           />
